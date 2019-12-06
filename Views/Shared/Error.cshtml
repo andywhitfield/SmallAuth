@@ -1,0 +1,15 @@
+﻿@model ErrorViewModel
+
+<h2>Error :(</h2>  
+
+<p>Sorry, we've had a problem handling this request.</p>
+
+<p class="lead text-left">
+    @if (!string.IsNullOrEmpty(Model.Error)) {
+        <strong>@Model.Error</strong>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ErrorDescription)) {
+        <small>@Model.ErrorDescription</small>
+    }
+</p>

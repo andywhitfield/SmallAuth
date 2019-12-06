@@ -1,0 +1,68 @@
+﻿body {
+    background-color: white;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+input, select, textarea {
+    max-width: 280px;
+}
+
+a:any-link {
+    color: #2A293E;
+}
+
+.navbar {
+    background-color: #F96714;
+}
+a.navbar-brand:any-link {
+    color: white;
+    font-size: 28px;
+}
+.nav > li > a:any-link {
+    color: white;
+}
+.nav > li > a:hover {
+    background-color: white;
+    color: #F96714;
+}
+.text-danger {
+    color: #F96714;
+    font-weight: 500;
+}
+.btn-danger, .btn-danger:hover {
+    background-color: #F96714;
+}
+.btn-success, .btn-success:hover {
+    color: black;
+    background-color: rgb(20, 249, 50);
+}
+.control-label {
+    font-weight: normal;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: white;
+    }
+    a:any-link {
+        color: white;
+    }
+    .nav > li > a:hover {
+        background-color: black;
+    }
+    a.navbar-brand:any-link {
+        color: black;
+    }
+    .nav > li > a:any-link {
+        color: black;
+    }
+    .nav > li > a:hover {
+        color: white;
+    }
+}

@@ -1,0 +1,17 @@
+﻿@using Microsoft.Extensions.Primitives
+@model AuthorizeViewModel
+
+<h1>Confirm Login</h1>
+
+<p>Do you want to continue logging into <strong>@Model.ApplicationName</strong>?</p>
+
+<form asp-controller="authorization" asp-action="authorize" method="post">
+    @foreach (var parameter in Context.Request.HasFormContentType ?
+        (IEnumerable<KeyValuePair<string, StringValues>>) Context.Request.Form : Context.Request.Query)
+    {
+        <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+    }
+
+    <input class="btn btn-lg btn-success" name="submit.Accept" type="submit" value="Yes" />
+    <input class="btn btn-lg btn-danger" name="submit.Deny" type="submit" value="No" />
+</form>

@@ -1,0 +1,15 @@
+﻿@using Microsoft.Extensions.Primitives
+
+<h1>Log out</h1>
+
+<p>Are you sure you want to log out?</p>
+
+<form asp-controller="authorization" asp-action="logout" method="post">
+    @foreach (var parameter in Context.Request.HasFormContentType ?
+        (IEnumerable<KeyValuePair<string, StringValues>>) Context.Request.Form : Context.Request.Query)
+    {
+        <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+    }
+
+    <input class="btn btn-lg btn-success" name="Confirm" type="submit" value="Yes" />
+</form>

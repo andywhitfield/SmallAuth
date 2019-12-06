@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SmallAuth.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="nav navbar-nav navbar-right">
+@if (SignInManager.IsSignedIn(User)) {
+    <li><a asp-controller="manage" asp-action="index" title="View or update your details">Welcome @((await @UserManager.GetUserAsync(User)).DisplayName)</a></li>
+    <li><a asp-controller="account" asp-action="logoff" title="Log off">Log off</a></li>
+}
+else {
+    <li><a asp-controller="account" asp-action="register">Register</a></li>
+    <li><a asp-controller="account" asp-action="login">Log in</a></li>
+}
+</ul>

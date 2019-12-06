@@ -1,0 +1,9 @@
+<h1>Confirm log off</h1>
+
+<p>
+    Are you sure you want to log off?
+    <form asp-controller="account" asp-action="logoff" method="post" id="homeLogoutForm">
+        <input class="btn btn-lg btn-success" name="submit.Accept" type="submit" value="Yes" />
+        <input class="btn btn-lg btn-danger" name="submit.Deny" type="submit" value="No" />
+    </form>
+</p>

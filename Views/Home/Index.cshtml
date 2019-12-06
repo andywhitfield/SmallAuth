@@ -1,0 +1,24 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User)) {
+    <h1>Welcome @((await @UserManager.GetUserAsync(User)).DisplayName)</h1>
+
+    <p>
+        <ul>
+            <li><a asp-controller="manage" asp-action="index" title="View or update your details">View or update your details</a></li>
+            <li><a asp-controller="account" asp-action="logoff">Log off</a></li>
+        </ul>
+    </p>
+} else {
+    <h1>Welcome</h1>
+
+    <p>
+        Please either login to access your account, or quickly register for a new account.
+        <ul>
+            <li><a asp-controller="account" asp-action="register">Register</a></li>
+            <li><a asp-controller="account" asp-action="login">Log in</a></li>
+        </ul>
+    </p>
+}
+

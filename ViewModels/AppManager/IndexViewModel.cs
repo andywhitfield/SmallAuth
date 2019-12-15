@@ -28,14 +28,14 @@ namespace SmallAuth.ViewModels.AppManager
         public string DisplayName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [StringLength(1000, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         [ValidateUriList]
         [DataType(DataType.Text)]
         [Display(Name = "Redirect URIs")]
         public string RedirectUris { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [StringLength(1000, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         [ValidateUriList]
         [DataType(DataType.Text)]
         [Display(Name = "Post logout redirect URIs")]

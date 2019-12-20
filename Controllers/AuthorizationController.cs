@@ -77,12 +77,31 @@ namespace SmallAuth.Controllers
         public IActionResult Deny() => Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
 
         [HttpGet("~/connect/logout")]
-        public IActionResult Logout() => View();
+        public async Task<IActionResult> Logout()
+        {
+            var model = new AuthorizeViewModel();
+            var request = HttpContext.GetOpenIddictServerRequest();
+            if (request?.ClientId != null)
+            {
+                var application = await _applicationManager.FindByClientIdAsync(request.ClientId);
+                model.ApplicationName = application?.DisplayName;
+            }
+            if (string.IsNullOrEmpty(model.ApplicationName))
+                model.ApplicationName = "the client application";
 
-        [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogoutPost()
+            return View(model);
+        }
+
+        [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken, FormValueRequired("submit.Confirm")]
+        public async Task<IActionResult> LogoutConfirm()
         {
             await _signInManager.SignOutAsync();
+            return SignOut(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        }
+        
+        [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken, FormValueRequired("submit.Deny")]
+        public IActionResult LogoutDeny()
+        {
             return SignOut(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
         

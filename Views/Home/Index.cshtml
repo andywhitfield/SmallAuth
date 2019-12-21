@@ -8,6 +8,9 @@
         <ul>
             <li><a asp-controller="manage" asp-action="index" title="View or update your details">View or update your details</a></li>
             <li><a asp-controller="account" asp-action="logoff">Log off</a></li>
+            @if (User.HasClaim("urn:smallauth:user", "superuser")) {
+                <li><a asp-controller="appmanager" asp-action="index">Manage Client Applications</a></li>
+            }
         </ul>
     </p>
 } else {

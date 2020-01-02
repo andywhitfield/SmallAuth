@@ -114,6 +114,7 @@ namespace SmallAuth
             });
 
             app.UseRouting();
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(options => options.MapControllerRoute(

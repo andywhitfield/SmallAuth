@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,6 +57,9 @@ namespace SmallAuth
 
                 .AddServer(options =>
                 {
+                    options.SetAccessTokenLifetime(TimeSpan.FromDays(7))
+                           .SetIdentityTokenLifetime(TimeSpan.FromDays(7));
+
                     options.SetAuthorizationEndpointUris("/connect/authorize")
                            .SetLogoutEndpointUris("/connect/logout")
                            .SetTokenEndpointUris("/connect/token")

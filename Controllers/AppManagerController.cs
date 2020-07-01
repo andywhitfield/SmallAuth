@@ -15,10 +15,10 @@ namespace SmallAuth.Controllers
     public class AppManagerController : Controller
     {
         private readonly ILogger _logger;
-        private readonly OpenIddictApplicationManager<OpenIddictApplication> _openIddictApplicationManager;
+        private readonly OpenIddictApplicationManager<OpenIddictEntityFrameworkCoreApplication> _openIddictApplicationManager;
 
         public AppManagerController(
-            OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager,
+            OpenIddictApplicationManager<OpenIddictEntityFrameworkCoreApplication> openIddictApplicationManager,
             ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<ManageController>();

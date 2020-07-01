@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,9 +15,14 @@ namespace SmallAuth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
+        {
+            Configuration = configuration;
+            Environment = environment;
+        }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +42,11 @@ namespace SmallAuth
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            
+            services
+                .AddDataProtection()
+                .SetApplicationName(typeof(Startup).Namespace)
+                .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(Environment.ContentRootPath, ".keys")));
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -57,8 +69,8 @@ namespace SmallAuth
 
                 .AddServer(options =>
                 {
-                    options.SetAccessTokenLifetime(TimeSpan.FromDays(7))
-                           .SetIdentityTokenLifetime(TimeSpan.FromDays(7));
+                    options.SetAccessTokenLifetime(TimeSpan.FromDays(1))
+                           .SetIdentityTokenLifetime(TimeSpan.FromDays(1));
 
                     options.SetAuthorizationEndpointUris("/connect/authorize")
                            .SetLogoutEndpointUris("/connect/logout")

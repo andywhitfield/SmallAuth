@@ -57,7 +57,8 @@ namespace SmallAuth.Controllers
                     OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
                     OpenIddictConstants.Permissions.Scopes.Profile,
-                    OpenIddictConstants.Permissions.Scopes.Roles
+                    OpenIddictConstants.Permissions.Scopes.Roles,
+                    OpenIddictConstants.Permissions.ResponseTypes.Code
                 },
                 Requirements =
                 {

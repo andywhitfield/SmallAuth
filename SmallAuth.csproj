@@ -8,8 +8,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.*" />
-    <PackageReference Include="OpenIddict.AspNetCore" Version="3.0.0-*" />
-    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.0-*" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="3.0.*" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.*" />
   </ItemGroup>
 
 </Project>

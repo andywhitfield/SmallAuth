@@ -103,6 +103,8 @@ namespace SmallAuth
                     options.UseLocalServer();
                     options.UseAspNetCore();
                 });
+            
+            services.AddHostedService<DbCleanupBackgroundService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

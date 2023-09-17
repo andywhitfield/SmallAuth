@@ -43,6 +43,17 @@ public class DbCleanupBackgroundService : BackgroundService
                     _logger.LogInformation($"Successfully deleted {deletedCount} expired tokens");
                 }
 
+                using (var serviceScope = _serviceScopeFactory.CreateScope())
+                {
+                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    var expireDate = DateTime.UtcNow.Subtract(_tokenExpireTime);
+                    _logger.LogInformation($"Checking for authorizations to remove older than: {expireDate}");
+                    using var txn = await dbContext.Database.BeginTransactionAsync();
+                    var deletedCount = await dbContext.Database.ExecuteSqlInterpolatedAsync($"delete from OpenIddictAuthorizations where CreationDate is null or CreationDate < {expireDate}");
+                    await txn.CommitAsync();
+                    _logger.LogInformation($"Successfully deleted {deletedCount} expired authorizations");
+                }
+
                 _logger.LogDebug($"Waiting {_pollPeriod} before running db clean up check again");
                 await Task.Delay(_pollPeriod, stoppingToken);
             }
